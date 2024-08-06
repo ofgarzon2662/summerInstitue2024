@@ -4,58 +4,58 @@ on:
     branches:
       - 'develop'
 jobs:
-  crearRelease:
-    name: CrearRelease
+  createRelease:
+    name: CreateRelease
     if: ${{ contains(github.event.head_commit.message, 'RELEASE') }}
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout de repositorio
+    - name: Checkout repository
       uses: actions/checkout@v2
-    - name: Configuracion de entorno de python
+    - name: Set up Python environment
       uses: actions/setup-python@v2
       with:
           python-version: '3.9'
-    - name: Instalación de librerías y dependencias
+    - name: Install libraries and dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Crear rama release
+    - name: Create release branch
       run: |
         git checkout -b ${{ github.event.head_commit.message }}
         git push -f -u origin ${{ github.event.head_commit.message }}
-  pruebas:
-    name: Pruebas
-    needs: crearRelease
+  tests:
+    name: Tests
+    needs: createRelease
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout de repositorio
+    - name: Checkout repository
       uses: actions/checkout@v2
-    - name: Configuracion de entorno de python
+    - name: Set up Python environment
       uses: actions/setup-python@v2
       with:
           python-version: '3.9'
-    - name: Instalación de librerías y dependencias
+    - name: Install libraries and dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Correr pruebas chef
-      id: correr-pruebas-chef
+    - name: Run chef tests
+      id: run-chef-tests
       run: python -m unittest tests/test_chef.py
-    - name: Correr pruebas ingrediente
-      id: correr-pruebas-ingrediente
+    - name: Run ingredient tests
+      id: run-ingredient-tests
       run: python -m unittest tests/test_ingrediente.py
-    - name: Correr pruebas login
-      id: correr-pruebas-login
+    - name: Run login tests
+      id: run-login-tests
       run: python -m unittest tests/test_login.py 
-    - name: Correr pruebas restaurante
-      id: correr-pruebas-restaurante
+    - name: Run restaurant tests
+      id: run-restaurant-tests
       run: python -m unittest tests/test_restaurante.py 
   automerge:
     name: Automerge
-    needs: pruebas
+    needs: tests
     runs-on: ubuntu-latest
     steps:
-    - name: Mezcla main -> release
+    - name: Merge main -> release
       uses: tukasz/direct-merge-action@master
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
