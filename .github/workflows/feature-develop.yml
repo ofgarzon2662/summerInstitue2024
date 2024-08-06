@@ -6,7 +6,7 @@ on:
 jobs:
   pruebas:
     name: Pruebas
-    if: ${{ contains(github.event.head_commit.message, 'HU-FINALIZADA') }}
+    if: ${{ contains(github.event.head_commit.message, 'SU-DONE') }}
     runs-on: ubuntu-latest
     steps:
     - name: Checkout de repositorio
