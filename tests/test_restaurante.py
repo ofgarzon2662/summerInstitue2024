@@ -217,6 +217,7 @@ class TestRestaurante(TestCase):
         #Verificar que la lista de restaurantes este vacia
         self.assertEquals(len(datos_respuesta),0)
 
+# Get Restaurant List
     def test_obtener_lista_restaurantes(self):
          #Generar 10 restaurantes con datos aleatorios
         for i in range(0,10):
