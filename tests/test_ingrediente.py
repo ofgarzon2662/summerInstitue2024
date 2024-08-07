@@ -183,6 +183,7 @@ class TestIngrediente(TestCase):
         ingrediente_borrado = Ingrediente.query.get(ingrediente.id)
         self.assertIsNone(ingrediente_borrado)
 
+    # Test to obtain ingredient list
     def test_dar_ingrediente(self):
         #Crear los datos del ingrediente
         nombre_nuevo_ingrediente = self.data_factory.sentence()
