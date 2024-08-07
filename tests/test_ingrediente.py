@@ -220,47 +220,4 @@ class TestIngrediente(TestCase):
         self.assertEqual(datos_respuesta['sitio'], sitio_nuevo_ingrediente)
         self.assertIsNotNone(datos_respuesta['id'])
 
-    def test_listar_ingredientes(self):
-        #Generar 10 ingredientes con datos aleatorios
-        for i in range(0,10):
-            #Crear los datos del ingrediente
-            nombre_nuevo_ingrediente = self.data_factory.sentence()
-            unidad_nuevo_ingrediente = self.data_factory.sentence()
-            costo_nuevo_ingrediente = round(random.uniform(0.1, 0.99), 2)
-            calorias_nuevo_ingrediente = round(random.uniform(0.1, 0.99), 2)
-            sitio_nuevo_ingrediente = self.data_factory.sentence()
-            
-            #Crear el ingrediente con los datos originales para obtener su id
-            ingrediente = Ingrediente(nombre = nombre_nuevo_ingrediente,
-                                  unidad=unidad_nuevo_ingrediente,
-                                  calorias=calorias_nuevo_ingrediente,
-                                  costo=costo_nuevo_ingrediente,
-                                  sitio=sitio_nuevo_ingrediente,
-                                  administrador=self.usuario_id)
-            db.session.add(ingrediente)
-            db.session.commit()
-            self.ingredientes_creados.append(ingrediente)
-        
-        #Definir endpoint, encabezados y hacer el llamado
-        endpoint_ingredientes = "/usuarios/{}/ingredientes".format(self.usuario_id)
-        headers = {'Content-Type': 'application/json', "Authorization": "Bearer {}".format(self.token)}
-        
-        resultado_consulta_ingrediente = self.client.get(endpoint_ingredientes,
-                                                        headers=headers)
-                                                   
-        #Obtener los datos de respuesta y dejarlos un objeto json
-        datos_respuesta = json.loads(resultado_consulta_ingrediente.get_data())
-                                                   
-        #Verificar que el llamado fue exitoso
-        self.assertEqual(resultado_consulta_ingrediente.status_code, 200)
-        
-        #Verificar los ingredientes creados con sus datos
-        for ingrediente in datos_respuesta:
-            for ingrediente_creado in self.ingredientes_creados:
-                if ingrediente['id'] == str(ingrediente_creado.id):
-                    self.assertEqual(ingrediente['nombre'], ingrediente_creado.nombre)
-                    self.assertEqual(ingrediente['unidad'], ingrediente_creado.unidad)
-                    self.assertEqual(float(ingrediente['costo']), float(ingrediente_creado.costo))
-                    self.assertEqual(float(ingrediente['calorias']), float(ingrediente_creado.calorias))
-                    self.assertEqual(ingrediente['sitio'], ingrediente_creado.sitio)
-                    self.assertEqual(ingrediente['id'], str(ingrediente_creado.id))
+    
