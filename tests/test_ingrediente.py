@@ -222,7 +222,7 @@ class TestIngrediente(TestCase):
         self.assertIsNotNone(datos_respuesta['id'])
 
     def test_listar_ingredientes(self):
-        #Generar 10 ingredientes con datos aleatorios
+        #Generar 10 ingredientes con datos aleatorio
         for i in range(0,10):
             #Crear los datos del ingrediente
             nombre_nuevo_ingrediente = self.data_factory.sentence()
