@@ -160,7 +160,7 @@ class TestRestaurante(TestCase):
         respuesta_restaurante = json.loads(solicitud_restaurante.get_data())
         restaurante_creado = Restaurante.query.get(respuesta_restaurante["id"])
 
-        # Se crea un nuevo restaurante con el mismo nombre
+        # We create a restaurant with the same name
 
         restaurante = {
             "nombre": restaurante_creado.nombre,
