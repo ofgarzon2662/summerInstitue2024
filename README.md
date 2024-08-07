@@ -10,5 +10,5 @@ This repository provides detailed documentation for a hypothetical project demon
 6. Create a Viertual environment with pipenvwith Python 3.9.18:  `$ pipenv --python 3.9.18`
 7. Install the Dependencies already provided in this repo: `$ pipenv install -r requirements.txt`
 8. Activate the virtual environment with pipenv: `$ pipenv shell`
-9. Run the app: `$ flask run`. This command starts the Flask development server. By default, it will run on http://127.0.0.1:5000/. You can specify a different host and port if necessary: `$ flask run --host=0.0.0.0 --port=8000`
+9. Run the app: `$ flask run`. This command starts the Flask development server. By default, it will run on `http://127.0.0.1:5000/`. You can specify a different host and port if necessary: `$ flask run --host=0.0.0.0 --port=8000`
 
