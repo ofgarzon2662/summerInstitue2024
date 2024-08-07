@@ -36,7 +36,7 @@ jobs:
     needs: tests
     runs-on: ubuntu-latest
     steps:
-    - name: Merge develop -> feature
+    - name: Merge feature -> develop
       uses: tukasz/direct-merge-action@master
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
