@@ -17,3 +17,4 @@ This repository provides detailed documentation for a hypothetical project demon
 1. Once the Flask app is up and running, open a new terminal window.
 2. In the root directory of the project, run: `$ python -m unittest discover -s tests`. This will run the entire unit test suite in this project.
 3. You can also run each unit test file separately: `$ python -m unittest tests.test_chef`
+
